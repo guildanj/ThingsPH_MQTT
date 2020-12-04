@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For ThingsPH_MQTT
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+ThingsPH_MQTT	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+initialize  KEYWORD2
+connect KEYWORD2
+disconnect  KEYWORD2
+subscribe   KEYWORD2
+unsubscribe KEYWORD2
+addpayload  KEYWORD2
+isconnected KEYWORD2
+publish    KEYWORD2
+
+###################################
+# Constants (LITERAL1)
+###################################
+
