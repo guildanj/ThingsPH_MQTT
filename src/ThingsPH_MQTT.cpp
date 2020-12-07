@@ -78,6 +78,10 @@ bool ThingsPH_MQTT::unsubscribe(char* topic) {
     return this->mqttClient.unsubscribe(topic);
 }
 
+int ThingsPH_MQTT::payloadcount() {
+    return _payloadCount;
+}
+
 void ThingsPH_MQTT::loop() {
     this->mqttClient.loop();
 }
@@ -130,6 +134,11 @@ bool ThingsPH_MQTT::addpayload(String dataname, float data) {
 
 bool ThingsPH_MQTT::addpayload(String dataname, double data) {
     return addpayload(dataname, String(data), false);
+}
+
+void ThingsPH_MQTT::clearpayloads() {
+    _payloadCount = 0; 
+    payload = "";
 }
 
 bool ThingsPH_MQTT::publish() {
