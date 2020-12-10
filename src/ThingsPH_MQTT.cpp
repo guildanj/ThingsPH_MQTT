@@ -96,7 +96,7 @@ bool ThingsPH_MQTT::addpayload(String dataname, String data, bool isString = tru
     payload = payload + "\"" + dataname + "\":";
     
     if (isString) {
-        payload = payload + "\"" + String(data) + "\":";
+        payload = payload + "\"" + String(data) + "\"";
     } else {
         payload = payload + String(data);
     }
