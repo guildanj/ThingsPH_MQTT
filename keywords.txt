@@ -22,6 +22,7 @@ isconnected	KEYWORD2
 publish	KEYWORD2
 payloadcount	KEYWORD2
 clearpayloads	KEYWORD2
+getpayloads	KEYWORD2
 
 ###################################
 # Constants (LITERAL1)
