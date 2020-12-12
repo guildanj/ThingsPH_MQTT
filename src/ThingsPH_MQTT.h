@@ -38,6 +38,7 @@ class ThingsPH_MQTT
         bool addpayload(String, uint32_t);
         bool addpayload(String, float);
         bool addpayload(String, double);
+        String getpayloads();
         void clearpayloads();
 
         bool isconnected();
