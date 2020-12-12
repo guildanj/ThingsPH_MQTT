@@ -136,6 +136,10 @@ bool ThingsPH_MQTT::addpayload(String dataname, double data) {
     return addpayload(dataname, String(data), false);
 }
 
+String ThingsPH_MQTT::getpayloads() {
+    return payload;
+}
+
 void ThingsPH_MQTT::clearpayloads() {
     _payloadCount = 0; 
     payload = "";
