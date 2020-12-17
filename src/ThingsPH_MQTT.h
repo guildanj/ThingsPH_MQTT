@@ -22,12 +22,12 @@ class ThingsPH_MQTT
         void initialize();
         void initialize(ThingsPH_Callback);
 
-        bool connect(char*, char*, char*);
+        bool connect(const char*, const char*, const char*);
         void disconnect();
 
-        bool subscribe(char*);
-        bool subscribe(char*, uint8_t);
-        bool unsubscribe(char*);
+        bool subscribe(const char*);
+        bool subscribe(const char*, uint8_t);
+        bool unsubscribe(const char*);
 
         bool addpayload(String, String, bool);
         bool addpayload(String, int8_t);
