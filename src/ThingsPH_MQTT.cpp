@@ -28,7 +28,7 @@ void ThingsPH_MQTT::initialize(ThingsPH_Callback callBack) {
     _payloadCount = 0;
 }
 
-bool ThingsPH_MQTT::connect(char* user, char* password, char* serial) {
+bool ThingsPH_MQTT::connect(const char* user, const char* password, const char* serial) {
     
     Serial.println("Attempting MQTT connection...");
 
@@ -66,15 +66,15 @@ void ThingsPH_MQTT::disconnect() {
     Serial.print("Disconnected to Things PH!");
 }
 
-bool ThingsPH_MQTT::subscribe(char* topic) {
+bool ThingsPH_MQTT::subscribe(const char* topic) {
     return this->mqttClient.subscribe(topic);
 }
 
-bool ThingsPH_MQTT::subscribe(char* topic, uint8_t qos) {
+bool ThingsPH_MQTT::subscribe(const char* topic, uint8_t qos) {
     return this->mqttClient.subscribe(topic, qos);
 }
 
-bool ThingsPH_MQTT::unsubscribe(char* topic) {
+bool ThingsPH_MQTT::unsubscribe(const char* topic) {
     return this->mqttClient.unsubscribe(topic);
 }
 
@@ -137,7 +137,7 @@ bool ThingsPH_MQTT::addpayload(String dataname, double data) {
 }
 
 String ThingsPH_MQTT::getpayloads() {
-    return payload;
+    return payload + "}}";
 }
 
 void ThingsPH_MQTT::clearpayloads() {
