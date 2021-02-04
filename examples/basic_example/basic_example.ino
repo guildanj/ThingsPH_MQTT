@@ -5,12 +5,18 @@
 
 WiFiClient espClient;
 ThingsPH_MQTT thingsph(espClient);
+StaticJsonDocument<256> jsondoc;
+JsonObject telemetry;
 
 const char* ssid = "...."; // <- Change to your WiFi Name.
 const char* password =  "...."; // <- Change to your WiFi Password.
 char* thingsUser = "";  // Get the username on things Docs/Guides under MQTT integration
 char* thingsPassword = ""; // Get the password on things Docs/Guides under MQTT integration
 char* thingsSerial = "test_device_01"; // Hardware Serial, Change this.
+
+bool sensor1 = true;
+float sensor2 = 1.0;
+int sensor3 = 10;
 
 void setup() {
   Serial.begin(115200);
@@ -26,24 +32,44 @@ void setup() {
   Serial.print("IP address:\t");
   Serial.println(WiFi.localIP());
 
-    // Don't forget to initialize ThingsPH_MQTT
+  // Don't forget to initialize ThingsPH_MQTT
   thingsph.initialize();
+
+  
+  jsondoc["hardware_serial"] = thingsSerial;
+  jsondoc["id"] = WiFi.macAddress();
+  telemetry = jsondoc.createNestedObject("payload_fields");
 }
 
 void loop() {
-    while (!thingsph.isconnected()) {
-        // Attempt to connect to Things Platform:
-        thingsph.connect(thingsUser, thingsPassword, thingsSerial);
-        delay(500);
-    }
+  while (!thingsph.isconnected()) {
+      // Attempt to connect to Things Platform:
+      // params: clientName, username, password, serial
+      thingsph.connect("espclient-test", thingsUser, thingsPassword, thingsSerial);
+      delay(500);
+  }
 
-    // Add fields:
-    thingsph.addpayload("Temperature", 88);
-    thingsph.addpayload("Battery", 99);
+  // Add data:
+  telemetry["sensor1"] = sensor1;
+  telemetry["sensor2"] = sensor2;
+  telemetry["sensor3"] = sensor3;
   
-    // Send Payload:
-    if (thingsph.publish()) Serial.println("SENT!");
+  // Update data:
+  sensor1 = !sensor1;
+  sensor2 = sensor2 + 0.2;
+  sensor3 = sensor3 + 3;
 
-    // Do not forget to call this function:
-    thingsph.loop();
+  // Send Payload:
+  if (thingsph.isconnected()) {
+    if (thingsph.publish(jsondoc)) {
+      Serial.println(F("Successfully sent!"));
+    } else {
+      Serial.println(F("Unable to send payload."));
+    }
+    espClient.flush();
+  }
+
+  // Do not forget to call this function:
+  thingsph.loop();
+  delay(10000); // Wait for 10 seconds
 }
