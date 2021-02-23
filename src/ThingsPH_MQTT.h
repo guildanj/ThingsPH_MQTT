@@ -13,8 +13,9 @@ class ThingsPH_MQTT
 
         typedef void (*ThingsPH_Callback)(char* topic, byte* payload, unsigned int length);
 
-        void initialize(uint16_t size = 1024);
-        void initialize(ThingsPH_Callback, uint16_t size = 1024);
+        void initialize(uint16_t size = 2048);
+        void initialize(ThingsPH_Callback, uint16_t size = 2048);
+        void setClient(Client& client);
 
         bool connect(const char*, const char*, const char*, const char*);
         void disconnect();

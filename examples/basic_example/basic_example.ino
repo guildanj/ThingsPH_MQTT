@@ -66,7 +66,7 @@ void loop() {
     } else {
       Serial.println(F("Unable to send payload."));
     }
-    espClient.flush();
+    espClient.flush(); // * Fix random disconnection after publishing
   }
 
   // Do not forget to call this function:

@@ -22,6 +22,10 @@ void ThingsPH_MQTT::initialize(ThingsPH_Callback callBack, uint16_t size) {
     this->mqttClient.setCallback(callBack);
 }
 
+void ThingsPH_MQTT::setClient(Client& client) {
+    this->mqttClient.setClient(client);
+}
+
 bool ThingsPH_MQTT::connect(const char* clientname, const char* user, const char* password, const char* serial) {
     
     Serial.println("Attempting MQTT connection...");

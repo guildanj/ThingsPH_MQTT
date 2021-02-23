@@ -13,6 +13,7 @@ ThingsPH_MQTT	KEYWORD1
 #######################################
 
 initialize	KEYWORD2
+setClient   KEYWORD2
 connect	KEYWORD2
 disconnect	KEYWORD2
 subscribe	KEYWORD2
